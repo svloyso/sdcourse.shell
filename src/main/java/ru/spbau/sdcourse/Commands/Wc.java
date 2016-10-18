@@ -52,7 +52,10 @@ public class Wc extends Command {
             }
         });
 
-        int words = 0, lines = 0, chars = 0, longest = 0;
+        int words = 0;
+        int lines = 0;
+        int chars = 0;
+        int longest = 0;
 
         String line;
         while((line = getLine()) != null) {

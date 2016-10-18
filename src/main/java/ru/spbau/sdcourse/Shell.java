@@ -69,7 +69,7 @@ public class Shell {
         for(Cmd cmd : cmds) {
             commands.add(CommandFactory.createCommand(cmd.name(), cmd.args(), commands.get(commands.size() - 1), enviroment));
         }
-        commands.add(new OutputWritter(commands.get(commands.size() - 1)));
+        commands.add(new OutputWriter(commands.get(commands.size() - 1)));
         List<Future<Void>> results = commands.stream().map(executor::submit).collect(Collectors.toList());
         for(int i = 1; i < results.size(); ++i) {
             try {

@@ -44,11 +44,11 @@ public class CommandFactory {
      * @param name specified name of builtin or external command
      * @param args list of arguments
      * @param prev command, which provide input
-     * @param env enviroment
+     * @param env environment
      * @return created command
      */
     public static Command createCommand(String name, List<String> args, Command prev, Map<String, String> env) {
-        if(builtinCommands.containsKey(name)) {
+        if (builtinCommands.containsKey(name)) {
             try {
                 return builtinCommands.get(name).getConstructor(Command.class, List.class, Map.class).newInstance(prev, args, env);
             } catch (Exception e) {

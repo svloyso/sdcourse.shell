@@ -21,12 +21,14 @@ public class Args extends Command {
 
     @Override
     protected void start() throws Exception {
-        if (arguments.size() < 1) throw new Exception("args: no command was given");
+        if (arguments.size() < 1) {
+            throw new Exception("args: no command was given");
+        }
         String commandName = arguments.get(0);
 
         ArrayList<String> newArgs = new ArrayList<>();
         String line;
-        while((line = getLine()) != null) {
+        while ((line = getLine()) != null) {
             newArgs.add(line);
         }
 

@@ -4,9 +4,9 @@ package ru.spbau.sdcourse.Commands;
  * Fake command for putting output to console
  * Created by svloyso on 20.09.16.
  */
-public class OutputWritter extends Command {
+public class OutputWriter extends Command {
 
-    public OutputWritter(Command prev) {
+    public OutputWriter(Command prev) {
         super(prev, null, null);
     }
 
