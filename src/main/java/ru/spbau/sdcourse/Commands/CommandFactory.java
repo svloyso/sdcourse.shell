@@ -2,6 +2,7 @@ package ru.spbau.sdcourse.Commands;
 
 import org.reflections.util.ClasspathHelper;
 
+import java.io.File;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.*;
@@ -20,11 +21,11 @@ public class CommandFactory {
     static Map<String, Class<? extends Command>> builtinCommands;
     static {
         String packageName = Command.class.getPackage().getName();
-        String packagePath = packageName.replace('.', '/');
+        String packagePath = packageName.replace('.', File.separatorChar);
         Set<URL> urls = Collections.singleton(ClasspathHelper.forClass(Command.class));
 
         builtinCommands = urls.stream()
-                .map(url -> Paths.get(url.getPath(), packagePath))
+                .map(url -> new File(ClasspathHelper.forClass(Command.class).getPath(), packagePath).toPath())
                 .flatMap(path -> Arrays.stream(path.toFile().list()))
                 .filter(s -> s.endsWith(".class"))
                 .map(s -> packageName + "." + s.substring(0, s.length() - 6))
