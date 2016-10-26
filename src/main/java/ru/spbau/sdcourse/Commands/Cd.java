@@ -6,11 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author Dmitriy Baidin on 10/4/2016.
+ * Change environment directory.
+ * Take only one argument - path to directory.
+ * Throw exception if no such directory.
  */
 @BuiltinCommand(name = "cd")
 public class Cd extends Command {
     /**
+     * Create instance of command Cd
+     *
      * @param prev other command which provides input.
      * @param args arguments for command.
      * @param env  environment variables.
@@ -19,6 +23,13 @@ public class Cd extends Command {
         super(prev, args, env);
     }
 
+
+    /**
+     * Change environment directory.
+     * Take only one argument - path to directory.
+     *
+     * @throws Exception if no such directory.
+     */
     @Override
     protected void start() throws Exception {
         if (arguments.size() != 1) {
