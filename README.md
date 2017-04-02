@@ -14,6 +14,3 @@ mvn test
 - Java 1.8
 - Scala 2.11
 - Maven 3.0
-
-# Project on Pivotal Tracker:
-https://www.pivotaltracker.com/n/projects/1878017
