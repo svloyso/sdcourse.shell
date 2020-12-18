@@ -1,6 +1,7 @@
 package ru.spbau.sdcourse;
 
 import org.junit.*;
+import org.junit.rules.TemporaryFolder;
 import ru.spbau.sdcourse.Commands.*;
 
 import java.nio.file.Paths;
@@ -20,6 +21,9 @@ public class ShellTest {
     private String testfile1 = "test1.txt";
     private String testfile2 = "test2.txt";
     private String execFile = "exec";
+
+    @Rule
+    public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
     ExecutorService executor = Executors.newCachedThreadPool();
 
@@ -157,5 +161,16 @@ public class ShellTest {
         List<Command> commands = Arrays.asList(reader, echo, args, wc, checker);
         List<Future<Void>> results = commands.stream().map(executor::submit).collect(Collectors.toList());
         for(Future<Void> f : results) f.get();
+    }
+
+    @Test(timeout = 1000)
+    public void cdTest() throws Exception {
+        temporaryFolder.newFile("fileName123");
+        Cd cd = new Cd(null, Collections.singletonList(temporaryFolder.getRoot().getAbsolutePath()), null);
+        Ls ls = new Ls(null, Collections.emptyList(), null);
+        TestChecker checker = new TestChecker(ls, Collections.singletonList("fileName123"));
+        cd.call();
+        ls.call();
+        checker.call();
     }
 }
